@@ -24,19 +24,11 @@ jobs:
       - name: Build with Maven
         run: mvn clean install
 
-      # Adicionar um passo para mudar para o diretório correto e listar arquivos (opcional para depuração)
-      - name: List WAR files
-        run: |
-          cd ${{ github.workspace }}/target
-          ls *.war
-
-      # Modificar o passo de upload para garantir o caminho correto
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: java-app
-          path: ${{ github.workspace }}/target/*.war
-
+          path: '${{ github.workspace }}/target/*.war'
 
   deploy:
     runs-on: windows-latest
